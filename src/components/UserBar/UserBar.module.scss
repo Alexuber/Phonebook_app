@@ -1,0 +1,20 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  &:hover,
+  &:focus {
+    background-color: #d1e5ef;
+    color: #1976d2;
+    border-color: #1976d2;
+  }
+}
