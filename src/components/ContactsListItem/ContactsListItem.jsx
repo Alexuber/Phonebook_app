@@ -7,9 +7,15 @@ import PropTypes from 'prop-types';
 export const ContactListItem = ({
   name,
   number,
+  id,
   deleteContact,
-  editContact,
+  toggleModal,
+  getSelectedContact,
 }) => {
+  const handleEditClick = () => {
+    toggleModal();
+    getSelectedContact(id);
+  };
   return (
     <li className={styles.item}>
       <ContactPhoneOutlinedIcon className={styles.iconUser} />
@@ -19,7 +25,7 @@ export const ContactListItem = ({
       </div>
       <div className={styles.actions}>
         <ModeEditOutlineOutlinedIcon
-          onClick={editContact}
+          onClick={handleEditClick}
           className={styles.icon}
         />
         <DeleteOutlineOutlinedIcon

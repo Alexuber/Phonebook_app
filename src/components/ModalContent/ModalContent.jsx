@@ -9,21 +9,20 @@ import { useDispatch } from 'react-redux';
 import { getContacts } from 'redux/contacts/selectors';
 import { ContentCutOutlined } from '@mui/icons-material';
 
-const ModalContent = ({ submitEditContact, selected }) => {
-  const [state, setState] = useState(selected);
-  const dispatch = useDispatch();
+const ModalContent = ({ selectedContact, toggleModal }) => {
+  const [state, setState] = useState(selectedContact || {});
+
   const handleChange = evt => {
     const { name, value } = evt.target;
-
     setState(prevState => ({ ...prevState, [name]: value }));
   };
-  const handleFormSubmit = (e, state) => {
-    console.log('🆑  state:', state);
 
-    e.preventDefault();
-    const id = state.id;
-    dispatch(changeContact(id, state));
-    // setState({});
+  const dispatch = useDispatch();
+
+  const handleFormSubmit = event => {
+    event.preventDefault();
+    dispatch(changeContact({ ...state }));
+    toggleModal();
   };
 
   return (

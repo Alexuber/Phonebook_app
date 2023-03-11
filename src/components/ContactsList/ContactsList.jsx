@@ -21,31 +21,32 @@ export const ContactList = () => {
   const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
   const error = useSelector(getError);
-  const [selected, setSelected] = useState({});
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-
-  const handleEditContact = id => {
-    setShowModal(true);
-    const selectedContact = contacts.find(item => id === item.id);
-
-    setSelected(selectedContact);
-  };
-
-  const submitEditContact = (id, state) => {
-    dispatch(changeContact(id, { name: state.name, number: state.number }));
-  };
+  const [selectedContact, setSelectedContact] = useState({});
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
   const filtered = useSelector(getFilteredContacts);
-  const hideModal = () => {
+  const toggleModal = () => {
     setShowModal(prevState => {
       return !prevState;
     });
   };
+
+  const getSelectedContact = id => {
+    const selectedContact = contacts.find(item => item.id === id);
+    setSelectedContact(selectedContact);
+  };
+
+  // const editContact = (id, data) => {
+  //   console.log('id', id);
+  //   console.log('data', data);
+  //   dispatch(changeContact(id, data));
+  //   toggleModal();
+  // };
 
   return (
     <>
@@ -59,20 +60,22 @@ export const ContactList = () => {
           return (
             <ContactListItem
               key={id}
+              id={id}
               name={name}
               number={number}
               deleteContact={() => dispatch(deleteContact(id))}
-              editContact={() => handleEditContact(id)}
+              toggleModal={toggleModal}
+              getSelectedContact={getSelectedContact}
             />
           );
         })}
         {error && <div style={{ color: 'red' }}>{error}</div>}
       </ul>
       {showModal && (
-        <Modal close={hideModal}>
+        <Modal close={toggleModal}>
           <ModalContent
-            selected={selected}
-            submitEditContact={submitEditContact}
+            selectedContact={selectedContact}
+            toggleModal={toggleModal}
           />
         </Modal>
       )}

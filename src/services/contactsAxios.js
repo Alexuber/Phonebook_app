@@ -8,10 +8,11 @@ export const postContact = contact =>
 
 export const deleteContactFromDB = id => authInstance.delete(`/contacts/${id}`);
 
-export const editContact = (id, data) => {
-  console.log('🆑  data:', data);
+export const editContact = data => {
+  console.log('data -->', data);
 
-  console.log('🆑  id:', id);
-
-  authInstance.patch(`/contacts/${id}`, data);
+  authInstance.patch(`/contacts/${data.id}`, {
+    name: data.name,
+    number: data.number,
+  });
 };
