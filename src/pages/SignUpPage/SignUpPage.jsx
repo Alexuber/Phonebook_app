@@ -52,7 +52,7 @@ export default function SignInPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <UserBar />
+      {/* <UserBar /> */}
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid

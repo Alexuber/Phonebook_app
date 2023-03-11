@@ -16,7 +16,6 @@ const UserContacts = () => {
         >
           Phonebook
         </Typography>
-        {/* <h1 className={styles.title}>Phonebook</h1> */}
         <ContactForm />
         <Typography
           variant="h6"
@@ -26,7 +25,6 @@ const UserContacts = () => {
         >
           Contacts
         </Typography>
-        {/* <h2 className={styles.contactsTitle}>Contacts</h2> */}
         <Filter />
         <ContactList />
       </section>

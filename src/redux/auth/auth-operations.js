@@ -5,7 +5,7 @@ export const registerUser = createAsyncThunk(
   'user/register',
   async (data, { rejectWithValue }) => {
     try {
-      const { data: result } = await userSignUp(data);
+      const result = await userSignUp(data);
       return result;
     } catch ({ message }) {
       return rejectWithValue(message);
@@ -44,6 +44,7 @@ export const currentUser = createAsyncThunk(
       const {
         auth: { token },
       } = getState();
+
       const { data } = await current(token);
       return data;
     } catch ({ response }) {

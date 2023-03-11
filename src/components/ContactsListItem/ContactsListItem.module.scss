@@ -8,3 +8,22 @@
 .name {
   text-transform: capitalize;
 }
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.icon {
+  fill: #79b0ed;
+  &:hover {
+    cursor: pointer;
+    fill: #1976d2;
+  }
+}
+
+.iconUser {
+  fill: #79b0ed;
+}

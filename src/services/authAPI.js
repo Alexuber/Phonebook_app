@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'https://connections-api.herokuapp.com';
 
-const authInstance = axios.create({
+export const authInstance = axios.create({
   baseURL: BASE_URL,
 });
 
@@ -34,6 +34,5 @@ export const logout = async () => {
 export const current = async token => {
   setToken(token);
   const response = await authInstance.get('/users/current');
-  setToken(response.token);
   return response;
 };

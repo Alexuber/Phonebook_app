@@ -54,13 +54,24 @@ export const addContactOnServer = createAsyncThunk(
     },
   }
 );
-
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await api.deleteContactFromDB(id);
       return data;
+    } catch ({ message }) {
+      return rejectWithValue(message);
+    }
+  }
+);
+
+export const changeContact = createAsyncThunk(
+  'contacts/editContact',
+  async (data, { rejectWithValue }) => {
+    try {
+      const { data: result } = await api.editContact(data);
+      return result;
     } catch ({ message }) {
       return rejectWithValue(message);
     }

@@ -1,0 +1,11 @@
+.navList {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+}
+.item {
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}

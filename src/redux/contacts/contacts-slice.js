@@ -43,7 +43,14 @@ const contactsSlice = createSlice({
         state.isLoading = false;
         state.items = state.items.filter(({ id }) => id !== payload.id);
       })
-      .addCase(operations.deleteContact.rejected, handleRejected);
+      .addCase(operations.deleteContact.rejected, handleRejected)
+      .addCase(operations.changeContact.pending, handlePending)
+      .addCase(operations.changeContact.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.items.name = payload.name;
+        state.items.number = payload.number;
+      })
+      .addCase(operations.changeContact.rejected, handleRejected);
   },
 });
 
