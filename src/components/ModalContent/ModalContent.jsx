@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { changeContact } from 'redux/contacts/contacts-operations';
 import styles from './ModalContent.module.scss';
 import { useDispatch } from 'react-redux';

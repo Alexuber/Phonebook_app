@@ -20,7 +20,6 @@ import styles from './ContactsList.module.scss';
 export const ContactList = () => {
   const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState({});

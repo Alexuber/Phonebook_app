@@ -7,7 +7,7 @@ export const SpinnerClock = () => {
       height="100"
       width="100"
       radius="48"
-      color="#ffffff"
+      color="#1976d2"
       ariaLabel="watch-loading"
       wrapperStyle={{ justifyContent: 'center', marginTop: '200px' }}
       wrapperClassName={styles.spinnerClock}

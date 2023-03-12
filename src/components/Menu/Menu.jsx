@@ -1,10 +1,17 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
+import { NavLink } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import styles from './Menu.module.scss';
+import { selectorIsLogin } from 'redux/auth/auth-selectors';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function BasicMenu() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isLogin = useSelector(selectorIsLogin);
+  const location = useLocation();
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -15,15 +22,14 @@ export default function BasicMenu() {
 
   return (
     <div>
-      <Button
+      <AccountCircleIcon
+        sx={{ mr: 2, cursor: 'pointer' }}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-      >
-        Dashboard
-      </Button>
+      />
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -33,9 +39,28 @@ export default function BasicMenu() {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/" className={styles.link}>
+            Home
+          </NavLink>
+        </MenuItem>
+        {isLogin && location.pathname !== '/phonebook' && (
+          <MenuItem onClick={handleClose}>
+            <NavLink to="/phonebook" className={styles.link}>
+              Phonebook
+            </NavLink>
+          </MenuItem>
+        )}
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/" className={styles.link}>
+            About
+          </NavLink>
+        </MenuItem>
+        <MenuItem onClick={handleClose}>
+          <NavLink to="/" className={styles.link}>
+            Terms
+          </NavLink>
+        </MenuItem>
       </Menu>
     </div>
   );

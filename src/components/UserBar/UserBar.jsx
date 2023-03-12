@@ -1,6 +1,5 @@
 import { Button } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
@@ -13,6 +12,7 @@ import {
   selectorName,
   selectorEmail,
 } from 'redux/auth/auth-selectors';
+import BasicMenu from 'components/Menu/Menu';
 
 const UserBar = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,8 @@ const UserBar = () => {
         <AppBar position="relative">
           <Toolbar className={styles.toolbar}>
             <Box className={styles.box}>
-              <AccountCircleIcon sx={{ mr: 2 }} />
+              <BasicMenu />
+              {/* <AccountCircleIcon sx={{ mr: 2 }} /> */}
               <Typography variant="subtitle2" color="inherit" noWrap>
                 {email}
               </Typography>
