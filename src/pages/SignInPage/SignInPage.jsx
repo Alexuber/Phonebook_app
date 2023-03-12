@@ -23,7 +23,10 @@ function Copyright(props) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link
+        color="inherit"
+        href="http://localhost:3000/goit-react-hw-08-phonebook"
+      >
         Phonebook
       </Link>{' '}
       {new Date().getFullYear()}
@@ -45,7 +48,7 @@ export default function SignInPage() {
   };
 
   return (
-    <Grid container component="main" sx={{ height: '100vh' }}>
+    <Grid container component="main" sx={{ height: '93.2vh' }}>
       <CssBaseline />
       <Grid
         item
@@ -111,9 +114,14 @@ export default function SignInPage() {
             />
             <Button
               type="submit"
-              fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{
+                mt: 3,
+                mb: 2,
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
             >
               Sign In
             </Button>
@@ -124,12 +132,12 @@ export default function SignInPage() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="register" to="/register" variant="body2">
+                <Link href="register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
             </Grid>
-            <Copyright sx={{ mt: 5 }} />
+            <Copyright sx={{ mt: 5 }} style={{ marginTop: '330px' }} />
           </Box>
         </Box>
       </Grid>

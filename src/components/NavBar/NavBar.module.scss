@@ -1,0 +1,22 @@
+.nav {
+  width: 600px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.item {
+  padding: 10px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: #aac1dd87;
+  }
+}

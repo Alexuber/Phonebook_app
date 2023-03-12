@@ -10,9 +10,9 @@ import {
 import {
   fetchContacts,
   deleteContact,
-  changeContact,
 } from 'redux/contacts/contacts-operations';
 import { useState } from 'react';
+import { SpinnerDots } from 'shared/components/Modal/Spinner/Spinner';
 import Modal from 'shared/components/Modal/Modal';
 import ModalContent from 'components/ModalContent/ModalContent';
 import styles from './ContactsList.module.scss';
@@ -41,19 +41,10 @@ export const ContactList = () => {
     setSelectedContact(selectedContact);
   };
 
-  // const editContact = (id, data) => {
-  //   console.log('id', id);
-  //   console.log('data', data);
-  //   dispatch(changeContact(id, data));
-  //   toggleModal();
-  // };
-
   return (
     <>
       <ul className={styles.list}>
-        {isLoading && contacts.length === 0 && (
-          <div style={{ color: 'red' }}> Loading contacts...</div>
-        )}
+        {isLoading && contacts.length === 0 && <SpinnerDots />}
         {filtered.map(contact => {
           const { id, name, number } = contact;
 
@@ -69,7 +60,6 @@ export const ContactList = () => {
             />
           );
         })}
-        {error && <div style={{ color: 'red' }}>{error}</div>}
       </ul>
       {showModal && (
         <Modal close={toggleModal}>

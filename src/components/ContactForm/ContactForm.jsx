@@ -36,6 +36,8 @@ export const ContactForm = () => {
     setState({ ...INITIAL_STATE });
   };
 
+  const empty = state.number === '' || state.name === '';
+
   const { name, number } = state;
   return (
     <Box component="form" noValidate onSubmit={handleFormSubmit} sx={{ mt: 1 }}>
@@ -69,45 +71,15 @@ export const ContactForm = () => {
         value={number}
         placeholder="Enter phone..."
       />
-      <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        disabled={empty}
+        className={styles.addBtn}
+      >
         Add contact
       </Button>
     </Box>
-
-    // <form className={styles.form} onSubmit={handleFormSubmit}>
-    //   <label className={styles.label} htmlFor="tel">
-    //     Name
-    //   </label>
-    //   <input
-    //     className={styles.input}
-    //     onChange={handleChange}
-    //     id="name"
-    //     type="text"
-    //     name="name"
-    //     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-    //     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-    //     required
-    //     value={name}
-    //     placeholder="Enter name..."
-    //   />
-    //   <label className={styles.label} htmlFor="tel">
-    //     Number
-    //   </label>
-    //   <input
-    //     className={styles.input}
-    //     onChange={handleChange}
-    //     id="tel"
-    //     type="tel"
-    //     name="number"
-    //     pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-    //     title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-    //     required
-    //     value={number}
-    //     placeholder="Enter phone..."
-    //   />
-    //   <button className={styles.btn} type="submit">
-    //     Add contact
-    //   </button>
-    // </form>
   );
 };

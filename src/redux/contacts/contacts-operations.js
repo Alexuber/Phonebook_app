@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import { toast } from 'react-toastify';
 import * as api from 'services/contactsAxios';
 
 export const fetchContacts = createAsyncThunk(
@@ -37,8 +37,17 @@ export const addContactOnServer = createAsyncThunk(
   async (contact, { rejectWithValue, getState }) => {
     try {
       const { data } = await api.postContact(contact);
+      toast.success('Contact added!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return data;
     } catch ({ message }) {
+      toast.error(`Ooops! ${message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+
       return rejectWithValue(message);
     }
   },
@@ -48,7 +57,10 @@ export const addContactOnServer = createAsyncThunk(
         contacts: { items },
       } = getState();
       if (isDublicate(items, contact)) {
-        alert('This contact already in the phonebook!');
+        toast.error('This contact already in the phonebook!', {
+          position: 'bottom-right',
+          autoClose: 3000,
+        });
         return false;
       }
     },
@@ -59,8 +71,16 @@ export const deleteContact = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const { data } = await api.deleteContactFromDB(id);
+      toast.success('Contact deleted!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return data;
     } catch ({ message }) {
+      toast.error(`Ooops! ${message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return rejectWithValue(message);
     }
   }
@@ -71,58 +91,17 @@ export const changeContact = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const { data: result } = await api.editContact(data);
+      toast.success('Contact refreshed!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return result;
     } catch ({ message }) {
+      toast.error(`Ooops! ${message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       return rejectWithValue(message);
     }
   }
 );
-
-// const { fetchContactsFromDB, deleteContactFromDB, postContact } = api;
-
-// export const fetchContacts = () => {
-//   const func = async dispatch => {
-//     try {
-//       dispatch(getContactsPending);
-//       const { data } = await fetchContactsFromDB();
-//       dispatch(getContactsFulfilled(data));
-//     } catch ({ response }) {
-//       dispatch(getContactsRejected(response));
-//     }
-//   };
-//   return func;
-// };
-
-// export const addContactOnServer = contact => {
-//   const func = async (dispatch, getState) => {
-//     try {
-//       const {
-//         contacts: { items },
-//       } = getState();
-
-//       if (isDublicate(items, contact)) {
-//         alert(`This contact already in phonebook!`);
-//         return;
-//       }
-//       dispatch(addContactPending);
-//       const { data } = await postContact(contact);
-//       dispatch(addContactFulfilled(data));
-//     } catch ({ response }) {
-//       dispatch(addContactRejected(response));
-//     }
-//   };
-//   return func;
-// };
-
-// export const deleteContact = id => {
-//   const func = async dispatch => {
-//     try {
-//       dispatch(deleteContactPending);
-//       await deleteContactFromDB(id);
-//       dispatch(deleteContactFulfilled(id));
-//     } catch ({ response }) {
-//       dispatch(deleteContactRejected(response));
-//     }
-//   };
-//   return func;
-// };

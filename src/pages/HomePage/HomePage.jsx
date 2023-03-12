@@ -1,16 +1,5 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import phonebook from 'assets/phonebook3.jpg';
+import { Button } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 import styles from './HomePage.module.scss';
 import background from 'assets/phonebook6.jpg';
 
@@ -20,12 +9,27 @@ const HomePage = () => {
       style={{
         backgroundImage: `url("${background}")`,
         width: '100vw',
-        height: '100vh',
+        height: '93.2vh',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        position: 'relative',
       }}
-    ></div>
+    >
+      <NavLink to="/register" className={styles.link}>
+        <Button
+          sx={{
+            backgroundColor: '#1976d2',
+            color: 'white',
+            border: '1px solid white',
+          }}
+          variant="outlined"
+          className={styles.btn}
+        >
+          Sign up
+        </Button>
+      </NavLink>
+    </div>
   );
 };
 

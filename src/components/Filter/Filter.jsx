@@ -13,7 +13,6 @@ export const Filter = () => {
   };
   return (
     <>
-      <h3 className={styles.title}>Find contacts by name</h3>
       <TextField
         margin="normal"
         required

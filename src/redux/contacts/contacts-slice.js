@@ -47,44 +47,12 @@ const contactsSlice = createSlice({
       .addCase(operations.changeContact.pending, handlePending)
       .addCase(operations.changeContact.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.items.name = payload.name;
-        state.items.number = payload.number;
+        const filtered = state.items.filter(({ id }) => payload.id !== id);
+        filtered.push(payload);
+        state.items = filtered;
       })
       .addCase(operations.changeContact.rejected, handleRejected);
   },
 });
 
 export default contactsSlice.reducer;
-
-// object notation
-
-// const contactsSlice = createSlice({
-//   name: 'contacts',
-//   initialState,
-//   reducers: {},
-//   extraReducers: {
-//     [operations.fetchContacts.pending]: handlePending,
-//     [operations.fetchContacts.fulfilled](state, { payload }) {
-//       state.isLoading = false;
-//       state.items = payload;
-//     },
-//     [operations.fetchContacts.rejected]: handleRejected,
-//     [operations.addContactOnServer.pending]: handlePending,
-//     [operations.addContactOnServer.fulfilled](state, { payload }) {
-//       state.isLoading = false;
-//       state.items.push(payload);
-//     },
-//     [operations.addContactOnServer.rejected]: handleRejected,
-//     [operations.deleteContact.pending]: handlePending,
-//     [operations.deleteContact.fulfilled](state, { payload }) {
-//       state.isLoading = false;
-//       state.items = state.items.filter(({ id }) => id !== payload.id);
-//     },
-//     [operations.deleteContact.rejected](state, { payload }) {
-//       state.isLoading = false;
-//       state.error = payload;
-//     },
-//   },
-// });
-
-// export default contactsSlice.reducer;

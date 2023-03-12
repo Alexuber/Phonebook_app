@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 import { changeContact } from 'redux/contacts/contacts-operations';
 import styles from './ModalContent.module.scss';
 import { useDispatch } from 'react-redux';
-import { getContacts } from 'redux/contacts/selectors';
-import { ContentCutOutlined } from '@mui/icons-material';
+import Typography from '@mui/material/Typography';
 
 const ModalContent = ({ selectedContact, toggleModal }) => {
   const [state, setState] = useState(selectedContact || {});
@@ -33,6 +32,14 @@ const ModalContent = ({ selectedContact, toggleModal }) => {
         onSubmit={handleFormSubmit}
         sx={{ mt: 1 }}
       >
+        <Typography
+          variant="h6"
+          color="inherit"
+          noWrap
+          className={styles.title}
+        >
+          Make changes here
+        </Typography>
         <TextField
           margin="normal"
           required
@@ -65,27 +72,13 @@ const ModalContent = ({ selectedContact, toggleModal }) => {
         />
         <Button
           type="submit"
-          fullWidth
+          className={styles.btn}
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
         >
-          Edit contact
+          Edit
         </Button>
       </Box>
-      {/* <div className={styles.wrapper}>
-        <h1 className={styles.title}>Edit your contact</h1>
-        <label htmlFor="status" className={styles.label}>
-          Name
-        </label>
-        <input value={name} type="input" onChange={() => handleChange(id)} />
-        <label htmlFor="status" className={styles.label}>
-          Name
-        </label>
-        <input value={number} type="input" onChange={() => handleChange(id)} />
-        <button type="button" onClick={onClick} className={styles.btn}>
-          Edit
-        </button>
-      </div> */}
     </>
   );
 };

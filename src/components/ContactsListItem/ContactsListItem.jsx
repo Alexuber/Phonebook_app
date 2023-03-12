@@ -1,8 +1,9 @@
 import styles from './ContactsListItem.module.scss';
-import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import PropTypes from 'prop-types';
+import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 export const ContactListItem = ({
   name,
@@ -18,10 +19,12 @@ export const ContactListItem = ({
   };
   return (
     <li className={styles.item}>
-      <ContactPhoneOutlinedIcon className={styles.iconUser} />
-      <div className={styles.info}>
-        <span className={styles.name}>{name}: </span>
-        <span>{number}</span>
+      <div className={styles.user}>
+        <AccountCircleTwoToneIcon className={styles.iconUser} />
+        <div className={styles.info}>
+          <span className={styles.name}>{name} </span>
+          <span className={styles.number}>{number}</span>
+        </div>
       </div>
       <div className={styles.actions}>
         <ModeEditOutlineOutlinedIcon

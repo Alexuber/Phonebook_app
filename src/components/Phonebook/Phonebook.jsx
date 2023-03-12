@@ -1,11 +1,10 @@
-import SignInPage from 'pages/SignInPage/SignInPage';
-import SignUpPage from 'pages/SignUpPage/SignUpPage';
-import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { currentUser } from 'redux/auth/auth-operations';
 import UserRoutes from 'UserRoutes';
 import UserBar from 'components/UserBar/UserBar';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Phonebook = () => {
   const dispatch = useDispatch();
@@ -17,6 +16,7 @@ export const Phonebook = () => {
     <>
       <UserBar />
       <UserRoutes />
+      <ToastContainer />
     </>
   );
 };
