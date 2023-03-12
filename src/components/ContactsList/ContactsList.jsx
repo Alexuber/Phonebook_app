@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   getContacts,
   getFilteredContacts,
-  getError,
   getIsLoading,
 } from 'redux/contacts/selectors';
 import {
