@@ -7,11 +7,14 @@ import styles from './Modal.module.scss';
 const modalRoot = document.getElementById('modal-root');
 
 const Modal = ({ close, children }) => {
-  const handleClose = useCallback(({ target, currentTarget, code }) => {
-    if (target === currentTarget || code === 'Escape') {
-      close();
-    }
-  }, []);
+  const handleClose = useCallback(
+    ({ target, currentTarget, code }) => {
+      if (target === currentTarget || code === 'Escape') {
+        close();
+      }
+    },
+    [close]
+  );
 
   useEffect(() => {
     document.body.addEventListener('keydown', handleClose);
@@ -37,9 +40,6 @@ const Modal = ({ close, children }) => {
       }}
     >
       <div className={styles.modal}>
-        {/* <span onClick={close} className={styles.close}>
-          X
-        </span> */}
         <HighlightOffOutlinedIcon onClick={close} className={styles.close} />
         {children}
       </div>
