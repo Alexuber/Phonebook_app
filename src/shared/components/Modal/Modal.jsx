@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
 import bg from 'assets/phonebook2.jpg';
@@ -7,11 +7,11 @@ import styles from './Modal.module.scss';
 const modalRoot = document.getElementById('modal-root');
 
 const Modal = ({ close, children }) => {
-  const handleClose = ({ target, currentTarget, code }) => {
+  const handleClose = useCallback(({ target, currentTarget, code }) => {
     if (target === currentTarget || code === 'Escape') {
       close();
     }
-  };
+  }, []);
 
   useEffect(() => {
     document.body.addEventListener('keydown', handleClose);
@@ -24,7 +24,11 @@ const Modal = ({ close, children }) => {
       onClick={handleClose}
       className={styles.overlay}
       style={{
-        backgroundImage: `url("${bg}")`,
+        backgroundImage: `linear-gradient(
+      to right,
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),url("${bg}")`,
         width: '100vw',
         height: '100vh',
         backgroundRepeat: 'no-repeat',

@@ -27,7 +27,6 @@ const UserBar = () => {
           <Toolbar className={styles.toolbar}>
             <Box className={styles.box}>
               <BasicMenu />
-              {/* <AccountCircleIcon sx={{ mr: 2 }} /> */}
               <Typography variant="subtitle2" color="inherit" noWrap>
                 {email}
               </Typography>

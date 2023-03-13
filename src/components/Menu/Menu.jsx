@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import styles from './Menu.module.scss';
 import { selectorIsLogin } from 'redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function BasicMenu() {
   const isLogin = useSelector(selectorIsLogin);
@@ -22,7 +22,7 @@ export default function BasicMenu() {
 
   return (
     <div>
-      <AccountCircleIcon
+      <MenuIcon
         sx={{ mr: 2, cursor: 'pointer' }}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
