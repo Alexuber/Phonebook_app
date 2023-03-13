@@ -36,12 +36,12 @@ const UserBar = () => {
             </Typography>
             <Button
               sx={{
-                backgroundColor: '#1976d2',
-                color: 'white',
+                backgroundColor: '#1c62b3',
+                color: '#fff',
                 border: '1px solid white',
               }}
               className={styles.btn}
-              variant="outlined"
+              variant="text"
               onClick={() => dispatch(logoutUser())}
             >
               Logout

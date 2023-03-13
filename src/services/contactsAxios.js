@@ -7,9 +7,9 @@ export const postContact = contact =>
 
 export const deleteContactFromDB = id => authInstance.delete(`/contacts/${id}`);
 
-export const editContact = data => {
-  return authInstance.patch(`/contacts/${data.id}`, {
-    name: data.name,
-    number: data.number,
+export const editContact = ({ id, name, number }) => {
+  return authInstance.patch(`/contacts/${id}`, {
+    name,
+    number,
   });
 };

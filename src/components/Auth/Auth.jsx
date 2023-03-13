@@ -15,11 +15,11 @@ export const Auth = () => {
             <NavLink to="/register" className={styles.link}>
               <Button
                 sx={{
-                  backgroundColor: '#1976d2',
-                  color: 'white',
+                  backgroundColor: '#1c62b3',
+                  color: '#fff',
                   border: '1px solid white',
                 }}
-                variant="outlined"
+                variant="text"
                 className={styles.btn}
               >
                 Sign up
@@ -30,11 +30,11 @@ export const Auth = () => {
             <NavLink to="/login" className={styles.link}>
               <Button
                 sx={{
-                  backgroundColor: '#1976d2',
-                  color: 'white',
+                  backgroundColor: '#1c62b3',
+                  color: '#fff',
                   border: '1px solid white',
                 }}
-                variant="outlined"
+                variant="text"
                 className={styles.btn}
               >
                 Login
