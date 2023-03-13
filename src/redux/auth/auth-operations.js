@@ -34,7 +34,7 @@ export const signInUser = createAsyncThunk(
       });
       return result;
     } catch ({ message }) {
-      toast.error(`Ooops! ${message}`, {
+      toast.error(`Wrong email or password!`, {
         position: 'bottom-right',
         autoClose: 3000,
       });

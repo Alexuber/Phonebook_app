@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import phonebook from 'assets/phonebook3.jpg';
 import { useDispatch } from 'react-redux';
 import { signInUser } from 'redux/auth/auth-operations';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -36,6 +38,8 @@ function Copyright(props) {
 }
 
 export default function SignInPage() {
+  const [empty, setEmpty] = useState({ email: false, password: false });
+
   const dispatch = useDispatch();
   const handleSubmit = event => {
     event.preventDefault();
@@ -44,7 +48,35 @@ export default function SignInPage() {
       email: data.get('email'),
       password: data.get('password'),
     };
+    if (loginData.email === '') {
+      setEmpty(prev => ({ ...prev, email: true }));
+      return;
+    }
+    if (loginData.password === '') {
+      setEmpty(prev => ({ ...prev, password: true }));
+      return;
+    }
+
+    if (!validate(loginData)) {
+      return;
+    }
     dispatch(signInUser(loginData));
+  };
+
+  const validate = data => {
+    if (
+      !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+        data.email
+      )
+    ) {
+      toast.error(`Invalid email format!`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      return false;
+    }
+
+    return true;
   };
 
   return (
@@ -97,6 +129,7 @@ export default function SignInPage() {
               name="email"
               autoComplete="email"
               autoFocus
+              error={empty.email}
             />
             <TextField
               margin="normal"
@@ -107,6 +140,7 @@ export default function SignInPage() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={empty.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -121,6 +155,10 @@ export default function SignInPage() {
                 display: 'block',
                 marginLeft: 'auto',
                 marginRight: 'auto',
+                '&:disabled': {
+                  backgroundColor: 'rgb(25 118 210 / 49%)',
+                  color: 'white',
+                },
               }}
             >
               Sign In

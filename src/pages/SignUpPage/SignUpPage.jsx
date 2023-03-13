@@ -14,6 +14,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import phonebook from 'assets/phonebook.jpg';
 import { registerUser } from 'redux/auth/auth-operations';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -39,6 +41,7 @@ const theme = createTheme();
 
 export default function SignInPage() {
   const dispatch = useDispatch();
+  const [empty, setEmpty] = useState({ email: false, password: false });
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -48,7 +51,47 @@ export default function SignInPage() {
       email: data.get('email'),
       password: data.get('password'),
     };
+    if (user.name === '') {
+      setEmpty(prev => ({ ...prev, name: true }));
+      return;
+    }
+    if (user.email === '') {
+      setEmpty(prev => ({ ...prev, email: true }));
+      return;
+    }
+    if (user.password === '') {
+      setEmpty(prev => ({ ...prev, password: true }));
+      return;
+    }
+    if (!validate(user)) {
+      return;
+    }
     dispatch(registerUser(user));
+  };
+
+  const validate = data => {
+    if (
+      !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+        data.email
+      )
+    ) {
+      toast.error(`Invalid email format!`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      return false;
+    }
+    if (
+      !/^[a-zA-Zа-яА-ЯёЁ'][a-zA-Z-а-яА-ЯёЁ' ]+[a-zA-Zа-яА-ЯёЁ']?$/.test(
+        data.name
+      )
+    ) {
+      return toast.error(`Invalid name format!`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    }
+    return true;
   };
 
   return (
@@ -103,6 +146,7 @@ export default function SignInPage() {
                     id="name"
                     label="Full Name"
                     autoFocus
+                    error={empty.name}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -113,6 +157,7 @@ export default function SignInPage() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    error={empty.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -124,6 +169,7 @@ export default function SignInPage() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    error={empty.password}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -144,6 +190,10 @@ export default function SignInPage() {
                   display: 'block',
                   marginLeft: 'auto',
                   marginRight: 'auto',
+                  '&:disabled': {
+                    backgroundColor: 'rgb(25 118 210 / 49%)',
+                    color: 'white',
+                  },
                 }}
               >
                 Sign Up
