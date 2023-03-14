@@ -45,6 +45,9 @@ const HomePage = () => {
                 backgroundColor: '#1976d2',
                 color: 'white',
                 border: '1px solid white',
+                marginTop: '20px',
+                marginLeft: 'auto',
+                marginRight: 'auto',
               }}
               variant="outlined"
               className={styles.btn}
@@ -59,12 +62,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// Hi! Welcome to PhoneBook!
-
-// This application will help you to save all your contacts in one place.
-// After the fast registration, you will have the possibility to add, delete and edit your contacts.
-
-// All your contacts will be stored on our secure server and available to you at any time.
-// Interested?
-// Register here

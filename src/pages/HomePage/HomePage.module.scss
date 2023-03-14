@@ -20,9 +20,7 @@
   max-width: 340px;
 }
 
-.text 
-  // transform: rotate(355deg);
-{
+.text {
   font-family: 'Special Elite', cursive;
   color: #5c5a5a;
   font-size: 22px;
@@ -66,9 +64,9 @@
   color: white;
   font-family: monospace;
   font-size: 30px;
-  white-space: nowrap; /* не переносить текст на другую строку */
-  overflow: hidden; /* скрываем переполнение контентом */
-  border-right: 3px solid white; /* рисуем курсор */
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid white;
   animation: cursor 0.75s step-end infinite, printed_text 5s steps(29);
 }
 
