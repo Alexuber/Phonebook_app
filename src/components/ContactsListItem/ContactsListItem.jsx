@@ -43,4 +43,7 @@ ContactListItem.propTypes = {
   name: PropTypes.string.isRequired,
   number: PropTypes.string.isRequired,
   deleteContact: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+  getSelectedContact: PropTypes.func.isRequired,
 };

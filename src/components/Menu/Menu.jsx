@@ -51,16 +51,6 @@ export default function BasicMenu() {
             </NavLink>
           </MenuItem>
         )}
-        <MenuItem onClick={handleClose}>
-          <NavLink to="/" className={styles.link}>
-            About
-          </NavLink>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <NavLink to="/" className={styles.link}>
-            Terms
-          </NavLink>
-        </MenuItem>
       </Menu>
     </div>
   );

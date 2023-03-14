@@ -9,16 +9,6 @@ const NavBar = () => {
           Home
         </NavLink>
       </li>
-      <li className={styles.item}>
-        <NavLink to="/" className={styles.link}>
-          About
-        </NavLink>
-      </li>
-      <li className={styles.item}>
-        <NavLink to="/" className={styles.link}>
-          Terms and Conditions
-        </NavLink>
-      </li>
     </ul>
   );
 };
