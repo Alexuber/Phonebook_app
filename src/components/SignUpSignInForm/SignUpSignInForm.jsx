@@ -11,7 +11,6 @@ import { useState } from 'react';
 import { validateInputs } from 'services/validationForm';
 import Typography from '@mui/material/Typography';
 import { registerUser, signInUser } from 'redux/auth/auth-operations';
-import { ClassNames } from '@emotion/react';
 
 function Copyright(props) {
   return (
