@@ -48,6 +48,7 @@ const HomePage = () => {
                 marginTop: '20px',
                 marginLeft: 'auto',
                 marginRight: 'auto',
+                display: 'block',
               }}
               variant="outlined"
               className={styles.btn}
