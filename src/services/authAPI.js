@@ -1,3 +1,4 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
 import axios from 'axios';
 
 const BASE_URL = 'https://connections-api.herokuapp.com';
@@ -36,3 +37,56 @@ export const current = async token => {
   const response = await authInstance.get('/users/current');
   return response;
 };
+
+export const authApi = createApi({
+  reducerPath: 'authApi',
+  baseQuery: authInstance,
+  tagTypes: ['Auth'],
+  endpoints: build => ({
+    // fetchContacts: build.query({
+    //   query: () => `/contacts`,
+    //   providesTags: ['Contacts'],
+    // }),
+    signUp: build.mutation({
+      query: data => ({
+        url: `/users/signup`,
+        method: 'POST',
+        data: data,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+    login: build.mutation({
+      query: data => ({
+        url: `/users/login`,
+        method: 'POST',
+        data: data,
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+    logout: build.mutation({
+      query: () => ({
+        url: `/users/logout`,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Auth'],
+    }),
+    // addContact: build.mutation({
+    //   query: contact => ({
+    //     url: `/contacts`,
+    //     method: 'POST',
+    //     data: contact,
+    //   }),
+    //   invalidatesTags: ['Contacts'],
+    // }),
+    // deleteContact: build.mutation({
+    //   query: id => ({
+    //     url: `/contacts/${id}`,
+    //     method: 'DELETE',
+    //   }),
+    //   invalidatesTags: ['Contacts'],
+    // }),
+  }),
+});
+
+export const { useSignUpMutation, useLoginMutation, useLogoutMutation } =
+  authApi;

@@ -4,9 +4,29 @@ import styles from './HomePage.module.scss';
 import background from 'assets/phonebook6.jpg';
 import { selectorIsLogin } from 'redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
+import {
+  useFetchContactsQuery,
+  usePostContactMutation,
+} from 'services/contactsAxios';
 
 const HomePage = () => {
   const isLogin = useSelector(selectorIsLogin);
+
+  // const { data, error, isLoading } = useFetchContactsQuery();
+  // console.log('🆑  isLoading:', isLoading);
+
+  // console.log('🆑  error:', error);
+
+  // console.log('🆑  data:', data);
+
+  // const { data, error, isLoading } = usePostContactMutation({
+  //   id: '640dfa878200000014e52827',
+  //   name: 'Alexxx',
+  //   number: '4562454',
+  // });
+  // console.log('🆑  isLoading:', isLoading);
+  // console.log('🆑  error:', error);
+  // console.log('🆑  data:', data);
 
   return (
     <div

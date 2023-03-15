@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { addContactOnServer } from 'redux/contacts/contacts-operations';
 import Box from '@mui/material/Box';
 import { toast } from 'react-toastify';
-
+import { useAddContactMutation } from 'services/contactsAxios';
 import styles from './ContactsForm.module.scss';
 
 const INITIAL_STATE = {
@@ -15,8 +13,9 @@ const INITIAL_STATE = {
 
 export const ContactForm = () => {
   const [state, setState] = useState({ ...INITIAL_STATE });
-  const dispatch = useDispatch();
   const [empty, setEmpty] = useState({ name: false, number: false });
+
+  const [addNewContact, result] = useAddContactMutation();
 
   const addContact = data => {
     if (data.name === '') {
@@ -45,7 +44,7 @@ export const ContactForm = () => {
         autoClose: 3000,
       });
     }
-    dispatch(addContactOnServer(data));
+    addNewContact(data);
   };
 
   const handleChange = evt => {

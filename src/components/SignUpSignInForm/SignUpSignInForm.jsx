@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { validateInputs } from 'services/validationForm';
 import Typography from '@mui/material/Typography';
 import { registerUser, signInUser } from 'redux/auth/auth-operations';
+import { useLoginMutation, useSignUpMutation } from 'services/authAPI';
 
 function Copyright(props) {
   return (
@@ -33,6 +34,8 @@ function Copyright(props) {
 }
 
 const SignUpSignInForm = () => {
+  const [signUp, result] = useSignUpMutation;
+  const [login, results] = useLoginMutation;
   const dispatch = useDispatch();
   const [empty, setEmpty] = useState({ email: false, password: false });
   const location = useLocation();
@@ -67,10 +70,10 @@ const SignUpSignInForm = () => {
       return;
     }
     if (onSignUp) {
-      dispatch(registerUser(userRegister));
+      signUp(userRegister);
     }
     if (onSignIn) {
-      dispatch(signInUser(userLogin));
+      login(userLogin);
     }
   };
 

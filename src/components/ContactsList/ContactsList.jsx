@@ -1,33 +1,35 @@
 import { ContactListItem } from 'components/ContactsListItem/ContactsListItem';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  getContacts,
-  getFilteredContacts,
-  getIsLoading,
-} from 'redux/contacts/selectors';
-import {
-  fetchContacts,
-  deleteContact,
-} from 'redux/contacts/contacts-operations';
+import { useSelector } from 'react-redux';
+import { getFilter } from 'redux/contacts/selectors';
 import { useState } from 'react';
 import { SpinnerDots } from 'shared/components/Modal/Spinner/Spinner';
 import Modal from 'shared/components/Modal/Modal';
 import ModalContent from 'components/ModalContent/ModalContent';
+import { useFetchContactsQuery } from 'services/contactsAxios';
 import styles from './ContactsList.module.scss';
 
 export const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const isLoading = useSelector(getIsLoading);
-  const dispatch = useDispatch();
+  const { data: contacts = [], error, isLoading } = useFetchContactsQuery();
   const [showModal, setShowModal] = useState(false);
   const [selectedContact, setSelectedContact] = useState({});
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  const filter = useSelector(getFilter);
 
-  const filtered = useSelector(getFilteredContacts);
+  const filterContacts = (filter, contacts) => {
+    if (!filter) {
+      return contacts;
+    }
+
+    const normalizedFilter = filter.toLowerCase();
+    const result = contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter)
+    );
+
+    return result;
+  };
+
+  const filtered = filterContacts(filter, contacts);
+
   const toggleModal = () => {
     setShowModal(prevState => {
       return !prevState;
@@ -52,7 +54,6 @@ export const ContactList = () => {
               id={id}
               name={name}
               number={number}
-              deleteContact={() => dispatch(deleteContact(id))}
               toggleModal={toggleModal}
               getSelectedContact={getSelectedContact}
             />
