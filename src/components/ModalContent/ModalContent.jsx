@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './ModalContent.module.scss';
 import Typography from '@mui/material/Typography';
 import { useEditContactMutation } from 'services/contactsAxios';
+import { toast } from 'react-toastify';
 
 const ModalContent = ({ selectedContact, toggleModal }) => {
   const [changeContact] = useEditContactMutation();
@@ -21,8 +22,16 @@ const ModalContent = ({ selectedContact, toggleModal }) => {
     try {
       event.preventDefault();
       await changeContact({ ...state });
+      toast.success('Contact refreshed!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       toggleModal();
     } catch (error) {
+      toast.error(`Ooops! ${error.message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
       console.log('🆑  error:', error.message);
     }
   };

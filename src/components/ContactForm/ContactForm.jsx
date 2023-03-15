@@ -15,9 +15,9 @@ export const ContactForm = () => {
   const [state, setState] = useState({ ...INITIAL_STATE });
   const [empty, setEmpty] = useState({ name: false, number: false });
 
-  const [addNewContact, result] = useAddContactMutation();
+  const [addNewContact] = useAddContactMutation();
 
-  const addContact = data => {
+  const addContact = async data => {
     if (data.name === '') {
       setEmpty(prev => ({ ...prev, name: true }));
     }
@@ -44,7 +44,19 @@ export const ContactForm = () => {
         autoClose: 3000,
       });
     }
-    addNewContact(data);
+    try {
+      await addNewContact(data);
+      toast.success('Contact added!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error(`Ooops! ${error.message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      console.log('🆑  error:', error.message);
+    }
   };
 
   const handleChange = evt => {

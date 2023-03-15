@@ -4,6 +4,8 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import PropTypes from 'prop-types';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import { useDeleteContactMutation } from 'services/contactsAxios';
+import { toast } from 'react-toastify';
+
 export const ContactListItem = ({
   name,
   number,
@@ -16,6 +18,22 @@ export const ContactListItem = ({
   const handleEditClick = () => {
     toggleModal();
     getSelectedContact(id);
+  };
+
+  const handleDeleteContact = async id => {
+    try {
+      await deleteContact(id);
+      toast.success('Contact deleted!', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error(`Ooops! ${error.message}`, {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+      console.log('🆑  error:', error.message);
+    }
   };
   return (
     <li className={styles.item}>
@@ -32,7 +50,7 @@ export const ContactListItem = ({
           className={styles.icon}
         />
         <DeleteOutlineOutlinedIcon
-          onClick={() => deleteContact(id)}
+          onClick={() => handleDeleteContact(id)}
           className={styles.icon}
         />
       </div>
