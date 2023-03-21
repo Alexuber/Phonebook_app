@@ -3,14 +3,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { changeContact } from 'redux/contacts/contacts-operations';
 import styles from './ModalContent.module.scss';
+import { useDispatch } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import { useEditContactMutation } from 'services/contactsAxios';
-import { toast } from 'react-toastify';
 
 const ModalContent = ({ selectedContact, toggleModal }) => {
-  const [changeContact] = useEditContactMutation();
-
   const [state, setState] = useState(selectedContact || {});
 
   const handleChange = evt => {
@@ -18,22 +16,12 @@ const ModalContent = ({ selectedContact, toggleModal }) => {
     setState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleFormSubmit = async event => {
-    try {
-      event.preventDefault();
-      await changeContact({ ...state });
-      toast.success('Contact refreshed!', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
-      toggleModal();
-    } catch (error) {
-      toast.error(`Ooops! ${error.message}`, {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
-      console.log('🆑  error:', error.message);
-    }
+  const dispatch = useDispatch();
+
+  const handleFormSubmit = event => {
+    event.preventDefault();
+    dispatch(changeContact({ ...state }));
+    toggleModal();
   };
 
   return (

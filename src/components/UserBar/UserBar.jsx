@@ -13,12 +13,8 @@ import {
   selectorEmail,
 } from 'redux/auth/auth-selectors';
 import BasicMenu from 'components/Menu/Menu';
-import { useLogoutMutation } from 'services/authAPI';
 
 const UserBar = () => {
-  const [userLogout, result] = useLogoutMutation();
-  console.log('🆑  result:', result);
-
   const dispatch = useDispatch();
   const name = useSelector(selectorName);
   const isLogin = useSelector(selectorIsLogin);
@@ -46,7 +42,7 @@ const UserBar = () => {
               }}
               className={styles.btn}
               variant="text"
-              onClick={() => userLogout()}
+              onClick={() => dispatch(logoutUser())}
             >
               Logout
             </Button>

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { addContactOnServer } from 'redux/contacts/contacts-operations';
 import Box from '@mui/material/Box';
 import { toast } from 'react-toastify';
-import { useAddContactMutation } from 'services/contactsAxios';
+
 import styles from './ContactsForm.module.scss';
 
 const INITIAL_STATE = {
@@ -13,11 +15,10 @@ const INITIAL_STATE = {
 
 export const ContactForm = () => {
   const [state, setState] = useState({ ...INITIAL_STATE });
+  const dispatch = useDispatch();
   const [empty, setEmpty] = useState({ name: false, number: false });
 
-  const [addNewContact] = useAddContactMutation();
-
-  const addContact = async data => {
+  const addContact = data => {
     if (data.name === '') {
       setEmpty(prev => ({ ...prev, name: true }));
     }
@@ -44,19 +45,7 @@ export const ContactForm = () => {
         autoClose: 3000,
       });
     }
-    try {
-      await addNewContact(data);
-      toast.success('Contact added!', {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
-    } catch (error) {
-      toast.error(`Ooops! ${error.message}`, {
-        position: 'bottom-right',
-        autoClose: 3000,
-      });
-      console.log('🆑  error:', error.message);
-    }
+    dispatch(addContactOnServer(data));
   };
 
   const handleChange = evt => {
