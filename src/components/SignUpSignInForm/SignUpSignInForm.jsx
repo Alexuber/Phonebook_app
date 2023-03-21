@@ -34,8 +34,8 @@ function Copyright(props) {
 }
 
 const SignUpSignInForm = () => {
-  const [signUp, result] = useSignUpMutation;
-  const [login, results] = useLoginMutation;
+  const [signUp, result] = useSignUpMutation();
+  const [login, results] = useLoginMutation();
   const dispatch = useDispatch();
   const [empty, setEmpty] = useState({ email: false, password: false });
   const location = useLocation();
