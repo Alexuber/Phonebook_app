@@ -2,7 +2,7 @@
   "name": "phonebook_app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Alexuber.github.io/Phonebook_app/",
+  "homepage": "https://Alexuber.github.io/Phonebook_app",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
